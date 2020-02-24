@@ -1,0 +1,408 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Role based node demo api.",
+        "version": "1.0.0",
+        "title": "Role based API",
+        "termsOfService": "",
+        "contact": {
+            "email": "naushad.hossain@leads-bd.com"
+        }
+    },
+    "host": "127.0.0.1:54321",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "user",
+            "description": "All user functionalities."
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/register": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "User sign up url",
+                "description": "",
+                "operationId": "user_sign_up",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Admin object needed for registration",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_register"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Register university authority",
+                "description": "",
+                "operationId": "registerVerifier",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object to get logged in",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/userlogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string",
+                            "example": "Verifier registration successful."
+                        },
+                        "headers": {
+                            "content-type": {
+                                "description": "application/json"
+                            },
+                            "charset": {
+                                "description": "utf-8"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Fetches all user",
+                "description": "",
+                "operationId": "getAllUsers",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/all_users"
+                        },
+                        "headers": {
+                            "content-type": {
+                                "description": "application/json"
+                            },
+                            "charset": {
+                                "description": "utf-8"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{user_id}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Fetches user by user_id",
+                "description": "",
+                "operationId": "getUserById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "user_id",
+                        "description": "User identifier needed to fetch user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/get_user"
+                        },
+                        "headers": {
+                            "content-type": {
+                                "description": "application/json"
+                            },
+                            "charset": {
+                                "description": "utf-8"
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Updates user by user_id",
+                "description": "",
+                "operationId": "updateUserById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "user_id",
+                        "description": "User identifier needed to fetch user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Attributes to be updated",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateUser"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/get_user"
+                        },
+                        "headers": {
+                            "content-type": {
+                                "description": "application/json"
+                            },
+                            "charset": {
+                                "description": "utf-8"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Deletes user by user_id",
+                "description": "",
+                "operationId": "deleteUserByEmail",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "user_id",
+                        "description": "User identifier needed to fetch user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string",
+                            "example": "User deleted successfully."
+                        },
+                        "headers": {
+                            "content-type": {
+                                "description": "application/json"
+                            },
+                            "charset": {
+                                "description": "utf-8"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "user_register": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Naushad Hossain"
+                },
+                "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "naushad.hossain@leads-bd.com"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "nas@123"
+                },
+                "role": {
+                    "type": "string",
+                    "example": "user"
+                }
+            },
+            "xml": {
+                "name": "admin_register"
+            }
+        },
+        "all_users": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "5e43c2cac590bf1d6b20af71"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Naushad Hossain"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "naushad.hossain@leads-bd.com"
+                    },
+                    "role": {
+                        "type": "string",
+                        "example": "admin"
+                    }
+                }
+            },
+            "xml": {
+                "name": "User"
+            }
+        },
+        "userlogin": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "naushad.hossain@leads-bd.com"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "nas@123"
+                }
+            },
+            "xml": {
+                "name": "Tag"
+            }
+        },
+        "VerifierLoginSuccess": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTmF1c2hhZCBIb3NzYWluIiwidW5pdmVyc2l0eV9pZCI6IlVBUCIsInVuaXZlcnNpdHlfZW1haWwiOiJuYXVzaGFkLmhvc3NhaW5AbGVhZHMtYmQuY29tIiwiaWF0IjoxNTc5NTExNjY3LCJleHAiOjE1Nzk1MTUyNjd9.VXorktH3-cT1f0_CBP3mkc_avCbnOGhx5OoQk6PKeaI"
+                }
+            }
+        },
+        "VerifierLoginFailed": {
+            "type": "string",
+            "example": "Invalid Email or Password"
+        },
+        "updateUser": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Naushad Hossain"
+                },
+                "role": {
+                    "type": "string",
+                    "example": "user"
+                }
+            }
+        },
+        "get_user": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "example": "5e43c2cac590bf1d6b20af71"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Naushad Hossain"
+                },
+                "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "naushad.hossain@leads-bd.com"
+                },
+                "role": {
+                    "type": "string",
+                    "example": "admin"
+                }
+            }
+        }
+    }
+}
