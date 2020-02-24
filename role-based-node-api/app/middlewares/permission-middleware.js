@@ -10,7 +10,7 @@ class PermissionManager {
         this.checkAuthentication = this.checkAuthentication.bind(this);
         this.grantPermission = this.grantPermission.bind(this);
 
-        this.accessControler = previlige.setPreviliges();
+        this.accessControler = previlige.getAccessController();
     }
 
     async allowCurrentUser(req, res, next) {

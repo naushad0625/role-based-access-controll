@@ -3,7 +3,7 @@ const AccessControl = require("accesscontrol");
 class Privileges {
     constructor() {
         this.accessControl = new AccessControl();
-        this.setPreviliges = this.setPreviliges.bind(this);
+        this.setAccessController = this.setAccessController.bind(this);
     }
 
     setAccessController() {
