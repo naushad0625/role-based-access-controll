@@ -3,7 +3,7 @@ class NoRouteFoundError extends Error {
         super();
         this.name = "NoRouteFoundError";
         this.message = "No route found!";
-        this.status = 404;
+        this.statusCode = 404;
 
         if (Error.captureStackTrace) {
             Error.captureStackTrace(this, NoRouteFoundError);

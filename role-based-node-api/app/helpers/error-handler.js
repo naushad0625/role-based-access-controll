@@ -5,11 +5,19 @@ class ErrorHandler {
         this.handleError = this.handleError.bind(this);
     }
 
-    handleError(error) {
-        consola.error(error);
-        return async (req, res, next) => {
-            res.status(error.status).json({ message: error.message });
-        };
+    async handleError(err, req, res, next) {
+        try {
+            consola.info("Inside handle error middleware!");
+            consola.error(err);
+
+            if (!err.statusCode) {
+                return res.status(500).send({ message: err.message });
+            }
+            res.status(err.statusCode).send({ message: err.message });
+        } catch (error) {
+            consola.error(error);
+            throw error;
+        }
     }
 }
 

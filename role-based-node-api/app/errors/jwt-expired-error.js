@@ -3,7 +3,7 @@ class JWTExpired extends Error {
         super();
         this.name = "JWTExpired";
         this.message = "Unauthorized access";
-        this.status = 401;
+        this.statusCode = 401;
 
         if (Error.captureStackTrace) {
             Error.captureStackTrace(this, JWTExpired);

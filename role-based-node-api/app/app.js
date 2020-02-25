@@ -40,9 +40,13 @@ class App {
                 badge: true,
             });
             await this.rootRouter.configureRoutes();
-            //this.app.use("/", this.rootRouter.getRouter());
+
+            //Handling all routes
+            this.app.use("/", this.rootRouter.getRouter());
+
+            //Handling errors
             this.app.use((err, req, res, next) => {
-                this.errorHandler.handleError(err);
+                this.errorHandler.handleError(err, req, res, next);
             });
         } catch (error) {
             consola.error(error);

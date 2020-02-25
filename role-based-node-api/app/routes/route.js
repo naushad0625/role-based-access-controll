@@ -11,7 +11,6 @@ const consola = require("consola");
 class RootRouter {
     constructor() {
         this.router = express.Router();
-        this.errorHandler = new ErrorHandler();
         this.userController = new UserController();
     }
 

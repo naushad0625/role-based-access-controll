@@ -3,7 +3,7 @@ class UserNotFoundError extends Error {
         super();
         this.name = "UserNotFound";
         this.message = "User not found!";
-        this.status = 404;
+        this.statusCode = 404;
 
         if (Error.captureStackTrace) {
             Error.captureStackTrace(this, UserNotFoundError);
