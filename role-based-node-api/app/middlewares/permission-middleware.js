@@ -1,6 +1,6 @@
 const User = require("../models/user-model.js");
-const previlige = require("../../server/roles.js");
 const consola = require("consola");
+const previlige = require("../../server/roles.js");
 const tokenEngine = require("../utils/jwt.js");
 const JWTExpiredError = require("../errors/jwt-expired-error.js");
 
@@ -10,6 +10,7 @@ class PermissionManager {
         this.checkAuthentication = this.checkAuthentication.bind(this);
         this.grantPermission = this.grantPermission.bind(this);
 
+        previlige.setAccessController();
         this.accessControler = previlige.getAccessController();
     }
 
@@ -18,10 +19,11 @@ class PermissionManager {
             const currentUser = res.locals.currentUser;
 
             if (!currentUser) {
-                console.log("No user is logged in");
-                return res
-                    .status(401)
-                    .json({ message: "Please login to continue" });
+                consola.info("User authentication failed!");
+                return res.status(401).json({
+                    message:
+                        "User authentication failed! Please login to continue",
+                });
             }
 
             req.currentUser = currentUser;
@@ -35,18 +37,22 @@ class PermissionManager {
     async checkAuthentication(req, res, next) {
         try {
             if (!req.headers.authorization) {
-                console.log("Guest user!. Access controlled.");
+                consola.info(
+                    "Non registered user. Please register to get full access.",
+                );
                 return next();
             }
 
-            const access_token = req.headers.authorization.split(" ")[1];
-            const payload = tokenEngine.verifyToken(access_token);
+            const accessToken = req.headers.authorization.split(" ")[1];
+            const payload = tokenEngine.verifyToken(accessToken);
 
             if (payload.exp < Date.now().valueOf() / 1000) {
                 return next(new JWTExpiredError());
             }
 
-            res.locals.currentUser = await User.findById(payload._id);
+            res.locals.currentUser = await User.findOne({
+                email: payload.email,
+            });
             next();
         } catch (error) {
             next(error);
@@ -56,6 +62,7 @@ class PermissionManager {
     grantPermission(action, terget) {
         return async (req, res, next) => {
             try {
+                consola.info("inside permissionManager.grantPermission");
                 const permitted = this.accessControler
                     .can(req.currentUser.role)
                     [action](terget);

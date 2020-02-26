@@ -17,24 +17,16 @@
             "description": "All user functionalities."
         }
     ],
-    "schemes": [
-        "http"
-    ],
+    "schemes": ["http"],
     "paths": {
         "/register": {
             "post": {
-                "tags": [
-                    "user"
-                ],
+                "tags": ["user"],
                 "summary": "User sign up url",
                 "description": "",
                 "operationId": "user_sign_up",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "in": "body",
@@ -53,25 +45,18 @@
                 },
                 "security": [
                     {
-                        "petstore_auth": [
-                            "write:pets",
-                            "read:pets"
-                        ]
+                        "petstore_auth": ["write:pets", "read:pets"]
                     }
                 ]
             }
         },
         "/login": {
             "post": {
-                "tags": [
-                    "user"
-                ],
+                "tags": ["user"],
                 "summary": "Register university authority",
                 "description": "",
                 "operationId": "registerVerifier",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "in": "body",
@@ -104,15 +89,11 @@
         },
         "/users": {
             "get": {
-                "tags": [
-                    "user"
-                ],
+                "tags": ["user"],
                 "summary": "Fetches all user",
                 "description": "",
                 "operationId": "getAllUsers",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "security": [
                     {
                         "Bearer": []
@@ -136,28 +117,14 @@
                 }
             }
         },
-        "/user/{user_id}": {
+        "/user": {
             "get": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Fetches user by user_id",
+                "tags": ["user"],
+                "summary": "Fetches info of logged user.",
                 "description": "",
-                "operationId": "getUserById",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "user_id",
-                        "description": "User identifier needed to fetch user",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
+                "operationId": "getUser",
+                "produces": ["application/json"],
+                "parameters": [],
                 "security": [
                     {
                         "Bearer": []
@@ -179,17 +146,15 @@
                         }
                     }
                 }
-            },
+            }
+        },
+        "/user/{user_id}": {
             "put": {
-                "tags": [
-                    "user"
-                ],
+                "tags": ["user"],
                 "summary": "Updates user by user_id",
                 "description": "",
                 "operationId": "updateUserById",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "in": "path",
@@ -233,15 +198,11 @@
                 }
             },
             "delete": {
-                "tags": [
-                    "user"
-                ],
+                "tags": ["user"],
                 "summary": "Deletes user by user_id",
                 "description": "",
                 "operationId": "deleteUserByEmail",
-                "produces": [
-                    "application/json"
-                ],
+                "produces": ["application/json"],
                 "parameters": [
                     {
                         "in": "path",

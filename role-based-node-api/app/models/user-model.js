@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 class UserModel {
@@ -13,31 +13,28 @@ class UserModel {
             name: {
                 type: String,
                 required: true,
-                trim: true
+                trim: true,
             },
             email: {
                 type: String,
                 unique: true,
                 required: true,
-                trim: true
+                trim: true,
             },
             password: {
                 type: String,
-                required: true
+                required: true,
             },
             role: {
                 type: String,
-                default: 'user',
-                enum: ["user", "moderator", "admin"]
+                default: "user",
+                enum: ["user", "moderator", "admin"],
             },
-            accessToken: {
-                type: String
-            }
-        })
+        });
     }
 
     getUserModel() {
-        return mongoose.model('user', this.userSchema);
+        return mongoose.model("user", this.userSchema);
     }
 }
 

@@ -29,9 +29,9 @@ class RootRouter {
 
             //GET requests
             this.router.get(
-                "/user/:user_id",
+                "/user",
                 permissionManager.allowCurrentUser,
-                this.userController.getUserById,
+                this.userController.getCurrentUser,
             );
             this.router.get(
                 "/users",
